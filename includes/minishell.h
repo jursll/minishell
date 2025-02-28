@@ -6,7 +6,7 @@
 /*   By: julrusse <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:12:57 by julrusse          #+#    #+#             */
-/*   Updated: 2025/02/27 18:09:42 by julrusse         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:00:49 by julrusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,9 @@ void			add_token(t_token **head, t_token *new_token);
 t_token_type	get_token_type(char *str);
 void			categorize_tokens(t_token *tokens);
 void			free_tokens(t_token **head);
+
+
+char			**split_arguments(char *input);
+t_token			*tokenize_input(char *input);;
 
 #endif
