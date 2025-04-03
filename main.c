@@ -6,55 +6,45 @@
 /*   By: julrusse <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:46:36 by julrusse          #+#    #+#             */
-/*   Updated: 2025/02/27 18:53:14 by julrusse         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:59:41 by julrusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "includes/builtin.h"
+#include <stdio.h>
 
-void	print_tokens(t_token *tokens)
+int main(void)
 {
-	while (tokens)
-	{
-		printf("Token: %-10s | Type: %d\n", tokens->value, tokens->type);
-		tokens = tokens->next;
-	}
+    int ret;
+    char cwd[1024];
+
+    // Test 1 : appel de pwd sans argument
+    // On s'attend à ce que pwd affiche le répertoire courant et retourne 0.
+    char *args1[] = {"pwd", NULL};
+    ret = builtin_pwd(args1);
+    if (ret == 0)
+    {
+        // On récupère le répertoire courant pour affichage
+        if (getcwd(cwd, sizeof(cwd)))
+            printf("Test 1 : Répertoire actuel (pwd sans argument) : %s\n", cwd);
+        else
+            printf("Test 1 : Erreur getcwd après pwd\n");
+        printf("Test 1 : pwd sans argument réussi\n");
+    }
+    else
+    {
+        printf("Test 1 : pwd sans argument échoué\n");
+    }
+
+    // Test 2 : appel de pwd avec un argument supplémentaire
+    // Comme pwd ne doit accepter aucun argument, on s'attend à un message d'erreur
+    char *args2[] = {"pwd", "extra", NULL};
+    ret = builtin_pwd(args2);
+    if (ret != 0)
+        printf("Test 2 : pwd avec argument supplémentaire a échoué (attendu)\n");
+    else
+        printf("Test 2 : pwd avec argument supplémentaire a réussi (inattendu)\n");
+
+    return 0;
 }
 
-void	print_arguments(char **args)
-{
-	int i = 0;
-	while (args[i])
-	{
-		printf("Arg[%d]: %s\n", i, args[i]);
-		i++;
-	}
-}
-
-int	main(void)
-{
-	char		*input;
-	t_token		*tokens;
-	char		**args;
-
-	// Simulation d'une entrée utilisateur
-	input = "echo \"hello world\" | cat -e > file.txt";
-
-	// Étape 1 : Tokenization
-	printf("\n🔹 Tokenization:\n");
-	tokens = tokenize_input(input);  // À modifier si besoin
-	print_tokens(tokens);
-
-	// Étape 2 : Split en arguments
-	printf("\n🔹 Arguments split:\n");
-	args = split_arguments(input);
-	print_arguments(args);
-
-	// Libération mémoire
-	free_tokens(&tokens);
-	for (int i = 0; args[i]; i++)
-		free(args[i]);
-	free(args);
-
-	return (0);
-}
