@@ -6,7 +6,7 @@
 /*   By: julrusse <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:06:17 by julrusse          #+#    #+#             */
-/*   Updated: 2025/02/27 17:55:59 by julrusse         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:42:51 by julrusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@
 #  define BUFFER_SIZE 2
 # endif
 
+# define MAX_PATH 4096
+
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
 # include <stdarg.h>
 # include <fcntl.h>
 # include <stdint.h>
+# include <ctype.h>
 
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);

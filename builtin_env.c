@@ -6,7 +6,7 @@
 /*   By: julrusse <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 15:12:23 by julrusse          #+#    #+#             */
-/*   Updated: 2025/04/03 15:12:54 by julrusse         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:57:38 by julrusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,34 @@
 #include <stdio.h>
 
 /*
- * Implémente la commande env en affichant l'environnement.
- * args : tableau d'arguments de la commande ("env" doit être seul)
- * env : tableau de chaînes représentant l'environnement (par exemple, envp de main)
- *
- * Si un argument supplémentaire est passé, on affiche une erreur.
- */
-int builtin_env(char **args, char **env)
+** builtin_env:
+**   Affiche toutes les variables d'environnement, une par ligne.
+**   Si la commande 'env' reçoit un argument (autre que "env"), affiche une
+**   erreur et retourne EXIT_FAILURE.
+**
+** Paramètres :
+**   - cmd : structure t_command contenant la commande et ses arguments.
+**           (cmd->args[0] est "env"; aucune autre argument n'est attendu)
+**   - env : tableau de chaînes représentant l'environnement.
+**
+** Retourne :
+**   - EXIT_SUCCESS si l'affichage a réussi,
+**   - EXIT_FAILURE si un argument inattendu est présent.
+*/
+int	builtin_env(t_command *cmd, char **env)
 {
-	int i = 0;
+	int	i;
 
-	// Vérifier qu'aucun argument n'est passé (env doit être exécuté sans arguments)
-	if (args[1])
+	i = 0;
+	if (cmd->args[1])
 	{
-		fprintf(stderr, "env: too many arguments\n");
-		return (1);
+		ft_putstr_fd("env: too many arguments\n", 2);
+		return (EXIT_FAILURE);
 	}
-	// Afficher l'environnement
 	while (env[i])
 	{
 		printf("%s\n", env[i]);
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

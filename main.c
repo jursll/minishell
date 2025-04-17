@@ -6,7 +6,7 @@
 /*   By: julrusse <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:46:36 by julrusse          #+#    #+#             */
-/*   Updated: 2025/04/03 13:59:41 by julrusse         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:36:07 by julrusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int main(void)
 {
     int ret;
-    char cwd[1024];
+    char cwd[MAX_PATH];
 
     // Test 1 : appel de pwd sans argument
     // On s'attend à ce que pwd affiche le répertoire courant et retourne 0.

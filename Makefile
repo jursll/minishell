@@ -6,7 +6,7 @@
 #    By: julrusse <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/27 18:48:26 by julrusse          #+#    #+#              #
-#    Updated: 2025/04/03 13:55:08 by julrusse         ###   ########.fr        #
+#    Updated: 2025/04/11 15:01:01 by julrusse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 SRCS =	main.c \
 		builtin_cd.c \
-		builtin_pwd.c
+		builtin_pwd.c \
+		builtin_env.c \
+		builtin_export.c
 
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
